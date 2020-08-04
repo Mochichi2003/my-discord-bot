@@ -2,5 +2,25 @@
   "name": "discordbot",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "lint": "prettier --write ."
+  },
+  "dependencies": {
+    "discord.js": "^12.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": false,
+    "printWidth": 80,
+    "bracketSpacing": true,
+    "arrowParens": "always"
+  }
 }

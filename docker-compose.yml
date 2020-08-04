@@ -4,8 +4,8 @@ services:
   bot:
     build: .
     # ports:
-      # - "5500:5500"
-      # - "9005:9005"
+    # - "5500:5500"
+    # - "9005:9005"
     volumes:
       - ".:/app/"
       - "node_modules_volume:/app/node_modules"
@@ -22,7 +22,7 @@ services:
   db:
     image: postgres:alpine
     # ports:
-      # - "5432:5432"
+    # - "5432:5432"
     volumes:
       - "data-base:/var/lib/postgres/data/"
     environment:
