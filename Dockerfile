@@ -28,5 +28,5 @@ RUN apk update && apk add   \
 COPY . .
 
 # EXPOSE 5500
-# CMD [ "ash"]
+# CMD [ "yarn","dev"]
 

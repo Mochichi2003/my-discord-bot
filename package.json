@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "nodemon index.js 2>&1 | tee -a app.log",
     "lint": "prettier --write ."
   },
   "dependencies": {
