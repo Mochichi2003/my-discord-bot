@@ -8,8 +8,11 @@
     "lint": "prettier --write ."
   },
   "dependencies": {
+    "create-react-app": "^3.4.1",
     "discord.js": "^12.2.0",
-    "moment": "^2.27.0"
+    "moment": "^2.27.0",
+    "react": "^16.13.1",
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "nodemon": "^2.0.4",

@@ -36,9 +36,9 @@ client.on("message", async (msg) => {
     let callback3;
 
     if (Replacement_character[1] != "") {
-      callback1 = pien1.replaceAll("👽", `${Replacement_character[1]}`);
-      callback2 = pien2.replaceAll("👽", `${Replacement_character[1]}`);
-      callback3 = pien3.replaceAll("👽", `${Replacement_character[1]}`);
+      callback1 = pien1.replace(/👽/g, `${Replacement_character[1]}`);
+      callback2 = pien2.replace(/👽/g, `${Replacement_character[1]}`);
+      callback3 = pien3.replace(/👽/g, `${Replacement_character[1]}`);
       console.log(callback1);
       console.log(callback2);
       console.log(callback3);
@@ -48,9 +48,15 @@ client.on("message", async (msg) => {
       callback3 = pien3;
     }
     // console.log(callback);
-    // msg.channel.send(callback1);
-    // msg.channel.send(callback2);
-    // msg.channel.send(callback3);
+    try {
+      msg.channel.send(callback1);
+      msg.channel.send(callback2);
+      msg.channel.send(callback3);
+    } catch (error) {
+      console.log(error);
+      msg.channel.send("エラーが出たぞ@mochi#6392");
+    }
+
 
   } else if (msg.content.match(/わん/)) {
     sendtime();
