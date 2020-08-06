@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const moment = require("moment");
+require('dotenv').config();
+
 client.on("ready", () => {
   console.log(`${client.user.username} でログインしています。`);
 });
@@ -72,5 +74,10 @@ client.on("message", async (msg) => {
 
   }
 });
+console.log(process.env.TEES);
 
-client.login("NzQwMjA0NzcyNDY3OTMzMjA0.Xylnag.NyjiX99P4s099JAadzEEE8Jf-6w");
+if (process.env.SEVER_TEST = true) {
+  client.login(process.env.MAIN_DISCORD_SWRVER);
+} else if (process.env.SEVER_TEST = false) {
+  client.login(process.env.TEST_DISCORD_SWRVER);
+}
