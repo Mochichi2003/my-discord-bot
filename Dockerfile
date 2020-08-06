@@ -8,12 +8,10 @@ ENV LC_ALL=ja_JP.UTF-8
 
 WORKDIR /app/
 
-# アプリケーションの依存関係をインストールする
-# ワイルドカードを使用して、package.json と package-lock.json の両方が確実にコピーされるようにします。
-# 可能であれば (npm@5+)
-# COPY package*.json ./
 
-# RUN yarn install 
+COPY package*.json ./
+
+RUN yarn install 
 RUN apk update && apk add   \
   zsh \
   tzdata && \
@@ -28,5 +26,5 @@ RUN apk update && apk add   \
 COPY . .
 
 # EXPOSE 5500
-# CMD [ "yarn","dev"]
+CMD [ "yarn","dev"]
 
