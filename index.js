@@ -83,9 +83,9 @@ client.on("message", async (msg) => {
     console.log(test);
   }
 });
-console.log(process.env.TEES);
+// console.log(process.env.TEES);
 
 
 console.log("うごくぞー");
-console.log(process.env.MAIN_DISCORD_SWRVER);
-client.login(process.env.MAIN_DISCORD_SWRVER);
+console.log(process.env.MAIN_DISCORD_SWRVER_A);
+client.login(process.env.MAIN_DISCORD_SWRVER_A);
