@@ -6,7 +6,7 @@ services:
 
     build: .
     env_file:
-      - ./.app.env
+      - ./.env
     # ports:
     # - "5500:5500"
     # - "9005:9005"

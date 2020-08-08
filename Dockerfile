@@ -18,13 +18,15 @@ RUN apk update && apk add   \
   cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
   apk del tzdata && \
   rm -rf /var/cache/apk/*
+
+
 # RUN apk add 
 # 本番用にコードを作成している場合
 # RUN npm install --only=production
-
+RUN yarn install
 # アプリケーションのソースをバンドルする
-COPY . .
+# COPY . .
 
 # EXPOSE 5500
-CMD [ "yarn","dev"]
+# CMD [ "yarn","dev"]
 

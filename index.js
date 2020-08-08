@@ -13,6 +13,7 @@ function sendtime() {
 client.on("message", async (msg) => {
   // console.log("\n\n\n");
   // console.log(msg.author.id);
+  console.log(msg);
   if (msg.author.id == "740204772467933204") {
     return;
 
@@ -64,7 +65,7 @@ client.on("message", async (msg) => {
     sendtime();
     msg.channel.send("(Ｕ＾ω＾)わんわんお！");
 
-  } else if (msg.content.match(/にゃー/)) {
+  } else if (msg.content.match(/にゃー/) || msg.content.match(/みゃー/)) {
     sendtime();
     msg.channel.send("o(^･x･^)o ﾐｬｧ♪");
 
@@ -72,12 +73,22 @@ client.on("message", async (msg) => {
     sendtime();
     msg.channel.send("モチモチモチモチモﾁﾓﾁﾓﾁﾓ(ﾉ)`ω´(ヾ)");
 
+  } else if (msg.content == "天気") {
+    var test
+    axios({
+      method: 'GET',
+      url: 'http://localhost:5500/post_text',
+      params: { name: 'Taroimo' }
+    }).then(test);
+    console.log(test);
   }
 });
 console.log(process.env.TEES);
 
-if (process.env.SEVER_TEST = true) {
+if (process.env.SEVER_TEST == "true") {
+  console.log("テストのほう");
   client.login(process.env.MAIN_DISCORD_SWRVER);
-} else if (process.env.SEVER_TEST = false) {
+} else {
+  console.log("メインの方");
   client.login(process.env.TEST_DISCORD_SWRVER);
 }
