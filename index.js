@@ -85,10 +85,7 @@ client.on("message", async (msg) => {
 });
 console.log(process.env.TEES);
 
-if (process.env.SEVER_TEST == "true") {
-  console.log("テストのほう");
-  client.login(process.env.MAIN_DISCORD_SWRVER);
-} else {
-  console.log("メインの方");
-  client.login(process.env.TEST_DISCORD_SWRVER);
-}
+
+console.log("うごくぞー");
+console.log(MAIN_DISCORD_SWRVER);
+client.login(process.env.MAIN_DISCORD_SWRVER);
