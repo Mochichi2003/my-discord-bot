@@ -87,5 +87,5 @@ console.log(process.env.TEES);
 
 
 console.log("うごくぞー");
-console.log(MAIN_DISCORD_SWRVER);
+console.log(process.env.MAIN_DISCORD_SWRVER);
 client.login(process.env.MAIN_DISCORD_SWRVER);
