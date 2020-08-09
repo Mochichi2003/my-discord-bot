@@ -3,6 +3,12 @@ const client = new Discord.Client();
 const moment = require("moment");
 require("dotenv").config();
 const Quote = require("inspirational-quotes");
+var fs = require("fs");
+const JSON = require("JSON");
+const axios = require("axios");
+
+const wetherAPIKey = process.env.WEATHER_API;
+const BASE_URL = "http://api.openweathermap.org/data/2.5/forecast";
 
 client.on("ready", () => {
   console.log(`${client.user.username} でログインしています。`);
@@ -21,7 +27,7 @@ client.on("message", async (msg) => {
     message.channel.send(value);
   }
 
-  console.log(JSON.stringify(msg.author.id + msg.channelID + msg.content));
+  console.log(JSON.stringify(msg.author.id + msg.content));
   // console.log("\n\n\n");
   // console.log(msg.author.id);
   // console.log(msg);
@@ -96,13 +102,47 @@ client.on("message", async (msg) => {
     sendtime();
     msg.channel.send("モチモチモチモチモﾁﾓﾁﾓﾁﾓ(ﾉ)`ω´(ヾ)");
   } else if (msg.content == "天気") {
-    var test;
+
+    console.log(wetherAPIKey);
+    var city_name = "Tokyo";
+    var city = "Tokyo";
+    var req_url =
+      "http://api.openweathermap.org/data/2.5/forecast?q=" +
+      city +
+      ",jp&units=metric&APPID=" +
+      wetherAPIKey;
+    // var request = new XMLHttpRequest();
+    let Weather_req_url = BASE_URL + `?q=${city_name}` + `&APPID=${wetherAPIKey}`;
+    // $(function () {
+    //   $.ajax({
+    //     url: url,
+    //     dataType: "json",
+    //     type: 'GET',
+    //   })
+    //     .done(function (data) {
+    //       console.log(data);
+    //     })
+    //     .fail(function (data) {
+    //       console.log(data);
+    //     });
+    // });
     axios({
-      method: "GET",
-      url: "http://localhost:5500/post_text",
-      params: { name: "Taroimo" },
-    }).then(test);
-    console.log(test);
+      method: "get",
+      url: `${req_url}`,
+      // responseType: 'stream'
+    }).then(function (response) {
+      // console.log(response);
+      // console.log(response.data.list);
+      response.data.list.forEach((data) => {
+        // console.log(data);
+        console.log("気温 = " + data.main.temp);
+        console.log("天気 = " + data.weather[0].main);
+        console.log("時間 = " + data.dt_txt);
+        console.log("時間 = " + data.wind.speed);
+      });
+
+      // fs.writeFileSync('output.json', JSON.stringify({MyDog: response}, null, ' '));
+    });
   } else if (msg.content == "名言") {
     console.log(Quote.getQuote());
     msg.channel.send(
@@ -116,7 +156,10 @@ console.log("うごくぞー");
 console.log(process.env.MAIN_DISCORD_SWRVER_A);
 client.login(process.env.MAIN_DISCORD_SWRVER_A);
 
+function getdata(param) {
 
+}
+getdata();
 // const express = require('express')
 // const app = express()
 // const port = 3000

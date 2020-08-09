@@ -9,11 +9,13 @@
     "lint": "prettier --write ."
   },
   "dependencies": {
+    "JSON": "^1.0.0",
     "axios": "^0.19.2",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "inspirational-quotes": "^1.0.8",
+    "jquery": "^3.5.1",
     "moment": "^2.27.0"
   },
   "devDependencies": {
@@ -28,8 +30,5 @@
     "printWidth": 80,
     "bracketSpacing": true,
     "arrowParens": "always"
-  },
-  "engines": {
-    "node": "~10"
   }
 }

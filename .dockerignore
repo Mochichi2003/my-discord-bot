@@ -3,4 +3,4 @@ npm-debug.log
 .git
 *.log
 public/images/uploadfiles/
-
+city.list.json
