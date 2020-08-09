@@ -138,13 +138,14 @@ client.on("message", async (msg) => {
       // console.log(response.data.list);
       var data = response.data.list;
       var hizuke;
+      let result_teski_yohou;
       for (let index = 0; index < 15; index++) {
         // const element = array[index];
 
-        console.log("気温 = " + data[index].main.temp);
-        console.log("天気 = " + data[index].weather[0].main);
-        // console.log("時間 = " + data[index].dt_txt);
-        console.log("風速 = " + data[index].wind.speed);
+        // console.log("気温 = " + data[index].main.temp);
+        // console.log("天気 = " + data[index].weather[0].main);
+        // // console.log("時間 = " + data[index].dt_txt);
+        // console.log("風速 = " + data[index].wind.speed);
         hizuke = data[index].dt_txt.split("-");
 
         tenkiaa =
@@ -153,11 +154,42 @@ client.on("message", async (msg) => {
           hizuke[1] +
           "月" +
           hizuke[2].split(" ")[0] +
-          "日 " +
+          "日" +
           hizuke[2].split(" ")[1].split(":")[0] +
           "時 ";
-        console.log("時間 = " + tenkiaa);
+        // console.log("時間 = " + tenkiaa);
+        var tenkiaa_icon;
+        // 英語の天気を絵文字に変換するところ
+        switch (data[index].weather[0].main) {
+          case "Clear":
+            tenkiaa_icon = "☀️";
+            break;
+          case "Clouds":
+            tenkiaa_icon = "☁️";
+            break;
+          case "Rain":
+            tenkiaa_icon = "🌧";
+            break;
+          case "Snow":
+            tenkiaa_icon = "⛄️";
+            break;
+          default:
+            tenkiaa_icon =
+              data[index].weather[0].main +
+              "\n\n_*!!実装されてないものがありますこのBOTを作った製作者に伝えてください!!*_\n\n";
+            break;
+        }
+
+
+        // result_teski_yohou +=
+        //   `\n${tenkiaa} 天気:${data[index].weather[0].main}` +
+        //   ` ${data[index].main.temp}℃ 風速:${data[index].wind.speed}`;
+        result_teski_yohou +=
+          `\n${tenkiaa} 天気:${tenkiaa_icon}` +
+          ` ${data[index].main.temp}℃ 風速:${data[index].wind.speed}`;
       }
+      console.log(result_teski_yohou.replace(/undefined/g, ` `));
+      msg.channel.send(result_teski_yohou.replace(/undefined/g, ` `))
       // response.data.list.forEach((data) => {
       //   // console.log(data);
       //   msg.channel.send(
