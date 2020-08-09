@@ -101,31 +101,34 @@ client.on("message", async (msg) => {
   } else if (msg.content.match(/もち/)) {
     sendtime();
     msg.channel.send("モチモチモチモチモﾁﾓﾁﾓﾁﾓ(ﾉ)`ω´(ヾ)");
-  } else if (msg.content == "天気") {
-
+  } else if (msg.content.match(/\/天気/)) {
     console.log(wetherAPIKey);
     var city_name = "Tokyo";
     var city = "Tokyo";
+    if (msg.content.match(/東京/)) {
+      city = "Tokyo";
+    } else if (msg.content.match(/新潟/)) {
+      city = "Niigata-shi";
+    } else if (msg.content.match(/札幌/)) {
+      city = "Sapporo-shi";
+    } else if (msg.content.match(/横浜/)) {
+      city = "Yokohama-shi";
+    } else if (msg.content.match(/大宮/)) {
+      city = "Ōmiya";
+    } else if (msg.content.match(/新潟/)) {
+      city = "Niigata-shi";
+    } else {
+      city = false;
+      msg.send("現在対応しているのは東京、新潟、札幌、横浜、大宮です");
+    }
+    console.log(city);
     var req_url =
       "http://api.openweathermap.org/data/2.5/forecast?q=" +
       city +
       ",jp&units=metric&APPID=" +
       wetherAPIKey;
+    //リクエストするURL
     // var request = new XMLHttpRequest();
-    let Weather_req_url = BASE_URL + `?q=${city_name}` + `&APPID=${wetherAPIKey}`;
-    // $(function () {
-    //   $.ajax({
-    //     url: url,
-    //     dataType: "json",
-    //     type: 'GET',
-    //   })
-    //     .done(function (data) {
-    //       console.log(data);
-    //     })
-    //     .fail(function (data) {
-    //       console.log(data);
-    //     });
-    // });
     axios({
       method: "get",
       url: `${req_url}`,
@@ -133,13 +136,34 @@ client.on("message", async (msg) => {
     }).then(function (response) {
       // console.log(response);
       // console.log(response.data.list);
-      response.data.list.forEach((data) => {
-        // console.log(data);
-        console.log("気温 = " + data.main.temp);
-        console.log("天気 = " + data.weather[0].main);
-        console.log("時間 = " + data.dt_txt);
-        console.log("時間 = " + data.wind.speed);
-      });
+      var data = response.data.list;
+      var hizuke;
+      for (let index = 0; index < 15; index++) {
+        // const element = array[index];
+
+        console.log("気温 = " + data[index].main.temp);
+        console.log("天気 = " + data[index].weather[0].main);
+        // console.log("時間 = " + data[index].dt_txt);
+        console.log("風速 = " + data[index].wind.speed);
+        hizuke = data[index].dt_txt.split("-");
+
+        tenkiaa =
+          // hizuke[0] +
+          // "年" +
+          hizuke[1] +
+          "月" +
+          hizuke[2].split(" ")[0] +
+          "日 " +
+          hizuke[2].split(" ")[1].split(":")[0] +
+          "時 ";
+        console.log("時間 = " + tenkiaa);
+      }
+      // response.data.list.forEach((data) => {
+      //   // console.log(data);
+      //   msg.channel.send(
+      //     `${data.dt_txt}:${data.weather[0].main} ${data.main.temp}℃ 風速:${data.wind.speed}m`,
+      //   );
+      // });
 
       // fs.writeFileSync('output.json', JSON.stringify({MyDog: response}, null, ' '));
     });
@@ -156,9 +180,7 @@ console.log("うごくぞー");
 console.log(process.env.MAIN_DISCORD_SWRVER_A);
 client.login(process.env.MAIN_DISCORD_SWRVER_A);
 
-function getdata(param) {
-
-}
+function getdata(param) { }
 getdata();
 // const express = require('express')
 // const app = express()
