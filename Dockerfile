@@ -1,4 +1,4 @@
-FROM node:12.18.3-alpine
+FROM node:alpine
 
 
 ENV LANG ja_JP.UTF-8
@@ -19,7 +19,8 @@ RUN apk update && apk add   \
   apk del tzdata && \
   rm -rf /var/cache/apk/*
 
-
+RUN  apk add   \
+  tmux
 # RUN apk add 
 # 本番用にコードを作成している場合
 # RUN npm install --only=production
@@ -28,5 +29,5 @@ RUN yarn install
 # COPY . .
 
 # EXPOSE 5500
-# CMD [ "yarn","dev"]
+CMD [ "yarn","dev"]
 

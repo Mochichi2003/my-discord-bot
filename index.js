@@ -180,7 +180,6 @@ client.on("message", async (msg) => {
             break;
         }
 
-
         // result_teski_yohou +=
         //   `\n${tenkiaa} 天気:${data[index].weather[0].main}` +
         //   ` ${data[index].main.temp}℃ 風速:${data[index].wind.speed}`;
@@ -189,7 +188,7 @@ client.on("message", async (msg) => {
           ` ${data[index].main.temp}℃ 風速:${data[index].wind.speed}`;
       }
       console.log(result_teski_yohou.replace(/undefined/g, ` `));
-      msg.channel.send(result_teski_yohou.replace(/undefined/g, ` `))
+      msg.channel.send(result_teski_yohou.replace(/undefined/g, ` `));
       // response.data.list.forEach((data) => {
       //   // console.log(data);
       //   msg.channel.send(
@@ -203,6 +202,15 @@ client.on("message", async (msg) => {
     console.log(Quote.getQuote());
     msg.channel.send(
       Quote.getQuote()["text"] + "\n by " + Quote.getQuote()["author"],
+    );
+  } else if (msg.content == "/help") {
+    msg.channel.send(
+      "・/ぴえん {好きな文字}   ででぴえん絵文字アートが出ます\n" +
+      "・/天気 {地名}  でその地名の天気予報を知ることができます。現在対応しているのは、東京・新潟・札幌・横浜・大宮です\n" +
+      "・「にゃー」としゃべると「o(^･x･^)o ﾐｬｧ♪」と返ってきます。\n" +
+      "・「わん」としゃべると「（Ｕ＾ω＾）わんわんお！」と返ってきます。\n" +
+      "・「もち」としゃべると「モチモチモチモチモﾁﾓﾁﾓﾁﾓ(ﾉ)`ω´(ヾ)」と返ってきます。\n" +
+      "・「!ping」としゃべると「Pong!」と返ってきます。\n"
     );
   }
 });
@@ -221,10 +229,9 @@ getdata();
 // app.get('/', (req, res) => res.send('Hello World!'))
 // app.listen(port, () => console.log(`Example app listening on port port!`))
 
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 3000;
 
-const express = require('express')
-const app = express()
-const port = process.env.PORT || 3000
-
-app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(port, () => console.log(`Example app listening on port port!`))
+app.get("/", (req, res) => res.send("Hello World!"));
+app.listen(port, () => console.log(`Example app listening on port port!`));
