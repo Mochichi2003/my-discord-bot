@@ -6,17 +6,26 @@ const Quote = require("inspirational-quotes");
 var fs = require("fs");
 const JSON = require("JSON");
 const axios = require("axios");
+const cowsay = require("cowsay");
 
 const wetherAPIKey = process.env.WEATHER_API;
 const BASE_URL = "http://api.openweathermap.org/data/2.5/forecast";
 
 client.on("ready", () => {
   console.log(`${client.user.username} でログインしています。`);
+
+
+  const Channel = client.channels.cache.get("583955930161479682");
+  if (!Channel) return console.log("Invalid channel.");
+  Channel.send("起動したのだ : " + moment().format("YYYY/MM/DD HH:mm:ss:SSSS"));
 });
 
 function sendtime() {
   console.log(moment().format("YYYY/MM/DD HH:mm:ss.SSSSSSSSS"));
 }
+
+client.on("ready", () => { });
+
 client.on("message", async (msg) => {
   function sed_message(value, message) {
     console.log(
@@ -70,7 +79,9 @@ client.on("message", async (msg) => {
     let callback1;
     let callback2;
     let callback3;
-
+    if (Replacement_character[1] == undefined) {
+      Replacement_character[1] = "👾";
+    }
     if (Replacement_character[1] != "") {
       callback1 = pien1.replace(/👽/g, `${Replacement_character[1]}`);
       callback2 = pien2.replace(/👽/g, `${Replacement_character[1]}`);
@@ -210,10 +221,27 @@ client.on("message", async (msg) => {
       "・「にゃー」としゃべると「o(^･x･^)o ﾐｬｧ♪」と返ってきます。\n" +
       "・「わん」としゃべると「（Ｕ＾ω＾）わんわんお！」と返ってきます。\n" +
       "・「もち」としゃべると「モチモチモチモチモﾁﾓﾁﾓﾁﾓ(ﾉ)`ω´(ヾ)」と返ってきます。\n" +
-      "・「!ping」としゃべると「Pong!」と返ってきます。\n"
+      "・「!ping」としゃべると「Pong!」と返ってきます。\n",
     );
+  } else if (msg.content.match(/\/リマインダー追加/)) {
+    // msg.channel.send("あいう")
+    let Replacement_character = msg.content.split(/\s/);
+    Replacement_character.forEach((contesnt) => {
+      msg.channel.send(contesnt);
+    });
+  } else if (msg.content.match(/\/cowsay/)) {
+    let messeges = msg.content.split(/\s/);
+    let result = cowsay.say({
+      text: messeges[1],
+      cow: "fence",
+      eyes: 'pp',
+      tongue: ';;',
+    })
+    msg.channel.send(`\`\`\`${result}\`\`\``)
+    // console.log(result);
   }
 });
+
 // console.log(process.env.TEES);
 
 console.log("うごくぞー");
@@ -228,10 +256,12 @@ getdata();
 
 // app.get('/', (req, res) => res.send('Hello World!'))
 // app.listen(port, () => console.log(`Example app listening on port port!`))
-
-const express = require("express");
-const app = express();
-const port = process.env.PORT || 3000;
-
-app.get("/", (req, res) => res.send("Hello World!"));
-app.listen(port, () => console.log(`Example app listening on port port!`));
+try {
+  // const express = require("express");
+  // const app = express();
+  // const port = process.env.PORT || 3000;
+  // app.get("/", (req, res) => res.send("Hello World!"));
+  // app.listen(port, () => console.log(`Example app listening on port port!`));
+} catch (error) {
+  console.log(error);
+}

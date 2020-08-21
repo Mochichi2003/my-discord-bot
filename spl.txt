@@ -1,0 +1,1 @@
+sequelize model:create --name reservation_all --attributes starttime:date text:TEXT reservation_person is_done:BOOLEAN
