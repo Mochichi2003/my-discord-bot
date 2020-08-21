@@ -231,6 +231,10 @@ client.on("message", async (msg) => {
     });
   } else if (msg.content.match(/\/cowsay/)) {
     let messeges = msg.content.split(/\s/);
+    if (!messeges[1]) {
+      console.log("空欄だよー");
+      messeges[1] = "名言っぽいことを言おうとした"
+    }
     let result = cowsay.say({
       text: messeges[1],
       cow: "fence",
