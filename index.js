@@ -243,13 +243,15 @@ client.on("message", async (msg) => {
     })
     msg.channel.send(`\`\`\`${result}\`\`\``)
     // console.log(result);
+  } else if (msg.content.match(/\/cowsay/)) {
+
   }
 });
 
 // console.log(process.env.TEES);
 
 console.log("うごくぞー");
-console.log(process.env.MAIN_DISCORD_SWRVER_A);
+// console.log(process.env.MAIN_DISCORD_SWRVER_A);
 client.login(process.env.MAIN_DISCORD_SWRVER_A);
 
 function getdata(param) { }
@@ -261,9 +263,9 @@ getdata();
 // app.get('/', (req, res) => res.send('Hello World!'))
 // app.listen(port, () => console.log(`Example app listening on port port!`))
 
-  const express = require("express");
-  const app = express();
-  const port = process.env.PORT || 300;
-  app.get("/", (req, res) => res.send("Hello World!"));
-  app.listen(port, () => console.log(`Example app listening on port port!`));
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 300;
+app.get("/", (req, res) => res.send("Hello World!"));
+app.listen(port, () => console.log(`Example app listening on port port!`));
 
