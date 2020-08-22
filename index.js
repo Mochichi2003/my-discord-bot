@@ -14,7 +14,6 @@ const BASE_URL = "http://api.openweathermap.org/data/2.5/forecast";
 client.on("ready", () => {
   console.log(`${client.user.username} でログインしています。`);
 
-
   const Channel = client.channels.cache.get("583955930161479682");
   if (!Channel) return console.log("Invalid channel.");
   Channel.send("起動したのだ : " + moment().format("YYYY/MM/DD HH:mm:ss:SSSS"));
@@ -233,16 +232,19 @@ client.on("message", async (msg) => {
     let messeges = msg.content.split(/\s/);
     if (!messeges[1]) {
       console.log("空欄だよー");
-      messeges[1] = "名言っぽいことを言おうとした"
+      messeges[1] = "名言っぽいことを言おうとした";
     }
     let result = cowsay.say({
       text: messeges[1],
       cow: "fence",
-      eyes: 'pp',
-      tongue: ';;',
-    })
-    msg.channel.send(`\`\`\`${result}\`\`\``)
+      eyes: "pp",
+      tongue: ";;",
+    });
+    msg.channel.send(`\`\`\`${result}\`\`\``);
     // console.log(result);
+  } else if (msg.content.match(/\/make_follow_rule/)) {
+    let messeges = msg.content.split(/\s/);
+    msg.channel.send("このメッセージに❤️の絵文字で反応すると" + messeges[1] + "のロールが追加されます");
   }
 });
 
