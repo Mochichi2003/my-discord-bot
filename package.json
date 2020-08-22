@@ -17,7 +17,6 @@
     "express": "^4.17.1",
     "inspirational-quotes": "^1.0.8",
     "jquery": "^3.5.1",
-    "klasa": "^0.5.0",
     "moment": "^2.27.0",
     "pg": "^8.3.0",
     "sequelize": "^6.3.4"
