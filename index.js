@@ -262,7 +262,7 @@ client.on("message", async (msg) => {
     const exampleEmbed = new Discord.MessageEmbed()
       .setColor("#ffbd39")
       .setTitle("考え中")
-      .attachFiles(["./assets/img/thinking-face_1f914.png"])
+      .attachFiles(["./img/thinking-face_1f914.png"])
       .setImage("attachment://discordjs.png");
     // .setImage("./assets/img/thinking-face_1f914.png")
 
