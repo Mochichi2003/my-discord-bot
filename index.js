@@ -61,7 +61,7 @@ client.on("message", async (msg) => {
   if (
     (msg.author.id == "740204772467933204" ||
       msg.author.id == "740907019808145509") &&
-      msg.content.match(/このメッセージに❤️の絵文字で反応すると/)
+    msg.content.match(/このメッセージに❤️の絵文字で反応すると/)
   ) {
     console.log(chalk.red("ロールを追加するところ"));
     msg.react("❤️");
@@ -258,12 +258,12 @@ client.on("message", async (msg) => {
     let messeges = msg.content.split(/\s/);
 
     msg.channel.send(
-      "このメッセージに❤️の絵文字で反応すると" +
+      "このメッセージに❤️の絵文字で反応すると:" +
       messeges[1] +
-      "のロールが追加されます\n" +
+      ":のロールが追加されます\n" +
       role_description(messeges[2]), //ロールの説明文
     );
-    
+
   } else if (msg.content === "!react") {
     msg.react("😄");
   } else if (msg.content === `user-info`) {
@@ -280,7 +280,59 @@ client.on("message", async (msg) => {
 
     msg.channel.send(exampleEmbed);
   }
+
+  // "#ff0000"
 });
+
+
+//リアクションの反応をトリガーにするところ
+client.on('messageReactionAdd', async (reaction, user) => {
+  // When we receive a reaction we check if the reaction is partial or not
+  console.log(user);
+  if (user.bot) {
+    return
+  }
+  if (reaction.partial) {
+    // If the message this reaction belongs to was removed the fetching might result in an API error, which we need to handle
+    try {
+      await reaction.fetch();
+    } catch (error) {
+      console.log('Something went wrong when fetching the message: ', error);
+      // Return as `reaction.message.author` may be undefined/null
+      return;
+    }
+  }
+  // Now the message has been cached and is fully available
+  // console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`);
+
+  // console.log(reaction.message.content.split(/:/));
+
+  const channel = client.channels.cache.get('583955930161479682');
+  channel.send("ロール:" + reaction.message.content.split(/:/)[1] + " メンバー:" + `<@${user.id}>`);
+
+  // let member = message.mentions.members.first();
+  if (reaction.id === "747016718261682206") {
+    // Define the emoji user add
+    let role = message.guild.roles.cache.find(role => role.name === 'Alerts');
+    if (message.channel.name !== 'alerts') {
+      message.reply(':x: You must go to the channel #alerts');
+    } else {
+      message.member.addRole("746730980299112478");
+    }
+  }
+  // or the person who made the command: let member = message.member;
+  // user.roles.set(['746730980299112478'])
+  //   .then(console.log)
+  //   .catch(console.error);
+  // Add the role!
+  console.log(JSON.stringify(user));
+  // user.addRole(reaction.message.content.split(/:/)[1]).catch(console.error);
+
+
+  // The reaction is now also fully available and the properties will be reflected accurately:
+  console.log(`[${moment().format("YYYY/MM/DD HH:mm:ss:SSSS")}][${reaction.count} ] ${user} have given the same reaction to this message!`);
+});
+
 
 // console.log(process.env.TEES);
 
@@ -316,7 +368,7 @@ function role_description(params) {
   let return_txet;
   if (params) {
     return_txet =
-      "このロールを追加すると" + params + "さんの投稿を見れるようになります";
+      "このロールを追加すると:" + params + ":さんの投稿を見れるようになります";
   } else {
     return_txet = "";
   }
