@@ -7,7 +7,7 @@ var fs = require("fs");
 const JSON = require("JSON");
 const axios = require("axios");
 const cowsay = require("cowsay");
-const chalk = require('chalk');
+const chalk = require("chalk");
 
 const wetherAPIKey = process.env.WEATHER_API;
 const BASE_URL = "http://api.openweathermap.org/data/2.5/forecast";
@@ -26,8 +26,6 @@ function sendtime() {
 }
 
 client.on("ready", () => { });
-
-
 
 client.on("message", async (msg) => {
   function sed_message(value, message) {
@@ -58,7 +56,16 @@ client.on("message", async (msg) => {
     }, 1000);
   }
 
+
+  //ここからコマンドに反応して返すところ
   if (
+    (msg.author.id == "740204772467933204" ||
+      msg.author.id == "740907019808145509") &&
+      msg.content.match(/このメッセージに❤️の絵文字で反応すると/)
+  ) {
+    console.log(chalk.red("ロールを追加するところ"));
+    msg.react("❤️");
+  } else if (
     msg.author.id == "740204772467933204" ||
     msg.author.id == "740907019808145509"
   ) {
@@ -249,11 +256,16 @@ client.on("message", async (msg) => {
     // console.log(result);
   } else if (msg.content.match(/\/make_follow_rule/)) {
     let messeges = msg.content.split(/\s/);
+
     msg.channel.send(
       "このメッセージに❤️の絵文字で反応すると" +
       messeges[1] +
-      "のロールが追加されます",
+      "のロールが追加されます\n" +
+      role_description(messeges[2]), //ロールの説明文
     );
+    
+  } else if (msg.content === "!react") {
+    msg.react("😄");
   } else if (msg.content === `user-info`) {
     msg.channel.send(
       `Your username: ${msg.author.username}\nYour ID: ${msg.author.id}`,
@@ -292,4 +304,21 @@ try {
   // app.listen(port, () => console.log(`Example app listening on port port!`));
 } catch (error) {
   console.log(error);
+}
+
+/**
+ * ロールの説明文を返します
+ * @param {string} params Discordのユーザーを指定します
+ * @return {string} Discordのユーザーの説明文が返って来ます
+ */
+
+function role_description(params) {
+  let return_txet;
+  if (params) {
+    return_txet =
+      "このロールを追加すると" + params + "さんの投稿を見れるようになります";
+  } else {
+    return_txet = "";
+  }
+  return return_txet;
 }
