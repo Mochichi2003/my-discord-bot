@@ -7,12 +7,14 @@ var fs = require("fs");
 const JSON = require("JSON");
 const axios = require("axios");
 const cowsay = require("cowsay");
+const chalk = require('chalk');
 
 const wetherAPIKey = process.env.WEATHER_API;
 const BASE_URL = "http://api.openweathermap.org/data/2.5/forecast";
 
+//起動したときのmessage
 client.on("ready", () => {
-  console.log(`${client.user.username} でログインしています。`);
+  console.log(chalk.red(`${client.user.username}`) + ` でログインしています。`);
 
   const Channel = client.channels.cache.get("583955930161479682");
   if (!Channel) return console.log("Invalid channel.");
@@ -25,6 +27,8 @@ function sendtime() {
 
 client.on("ready", () => { });
 
+
+
 client.on("message", async (msg) => {
   function sed_message(value, message) {
     console.log(
@@ -35,7 +39,7 @@ client.on("message", async (msg) => {
     message.channel.send(value);
   }
 
-  console.log(JSON.stringify(msg.author.id + msg.content));
+  console.log(JSON.stringify("[" + msg.author.id + "]" + msg.content));
   // console.log("\n\n\n");
   // console.log(msg.author.id);
   // console.log(msg);
@@ -240,19 +244,37 @@ client.on("message", async (msg) => {
       eyes: "pp",
       tongue: ";;",
     });
+
     msg.channel.send(`\`\`\`${result}\`\`\``);
     // console.log(result);
   } else if (msg.content.match(/\/make_follow_rule/)) {
     let messeges = msg.content.split(/\s/);
-    msg.channel.send("このメッセージに❤️の絵文字で反応すると" + messeges[1] + "のロールが追加されます");
+    msg.channel.send(
+      "このメッセージに❤️の絵文字で反応すると" +
+      messeges[1] +
+      "のロールが追加されます",
+    );
+  } else if (msg.content === `user-info`) {
+    msg.channel.send(
+      `Your username: ${msg.author.username}\nYour ID: ${msg.author.id}`,
+    );
+  } else if (msg.content === "!thinking") {
+    const exampleEmbed = new Discord.MessageEmbed()
+      .setColor("#ffbd39")
+      .setTitle("考え中")
+      .attachFiles(["./assets/img/thinking-face_1f914.png"])
+      .setImage("attachment://discordjs.png");
+    // .setImage("./assets/img/thinking-face_1f914.png")
+
+    msg.channel.send(exampleEmbed);
   }
 });
 
 // console.log(process.env.TEES);
 
 console.log("うごくぞー");
-console.log(process.env.MAIN_DISCORD_SWRVER_A);
-client.login(process.env.MAIN_DISCORD_SWRVER_A);
+console.log(process.env.MAIN_DISCORD_SWRVER_B);
+client.login(process.env.MAIN_DISCORD_SWRVER_B);
 
 function getdata(param) { }
 getdata();

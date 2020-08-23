@@ -14,17 +14,17 @@ COPY package*.json ./
 RUN yarn install 
 RUN apk update && apk add   \
   zsh \
+  tmux \
   tzdata && \
   cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
   apk del tzdata && \
   rm -rf /var/cache/apk/*
 
-RUN  apk add   \
-  tmux
+
 # RUN apk add 
 # 本番用にコードを作成している場合
 # RUN npm install --only=production
-RUN yarn install
+# RUN yarn install
 # アプリケーションのソースをバンドルする
 # COPY . .
 
