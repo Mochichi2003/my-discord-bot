@@ -26,14 +26,14 @@ function sendtime() {
   console.log(moment().format("YYYY/MM/DD HH:mm:ss.SSSSSSSSS"));
 }
 
-client.on("ready", () => { });
+client.on("ready", () => {});
 
 client.on("message", async (msg) => {
   function sed_message(value, message) {
     console.log(
       `[${moment().format("YYYY/MM/DD HH:mm:ss.SSSSS")}] <#${msg}>` +
-      value +
-      "\n",
+        value +
+        "\n",
     );
     message.channel.send(value);
   }
@@ -227,11 +227,11 @@ client.on("message", async (msg) => {
   } else if (msg.content == "/help") {
     msg.channel.send(
       "・/ぴえん {好きな文字}   ででぴえん絵文字アートが出ます\n" +
-      "・/天気 {地名}  でその地名の天気予報を知ることができます。現在対応しているのは、東京・新潟・札幌・横浜・大宮です\n" +
-      "・「にゃー」としゃべると「o(^･x･^)o ﾐｬｧ♪」と返ってきます。\n" +
-      "・「わん」としゃべると「（Ｕ＾ω＾）わんわんお！」と返ってきます。\n" +
-      "・「もち」としゃべると「モチモチモチモチモﾁﾓﾁﾓﾁﾓ(ﾉ)`ω´(ヾ)」と返ってきます。\n" +
-      "・「!ping」としゃべると「Pong!」と返ってきます。\n",
+        "・/天気 {地名}  でその地名の天気予報を知ることができます。現在対応しているのは、東京・新潟・札幌・横浜・大宮です\n" +
+        "・「にゃー」としゃべると「o(^･x･^)o ﾐｬｧ♪」と返ってきます。\n" +
+        "・「わん」としゃべると「（Ｕ＾ω＾）わんわんお！」と返ってきます。\n" +
+        "・「もち」としゃべると「モチモチモチモチモﾁﾓﾁﾓﾁﾓ(ﾉ)`ω´(ヾ)」と返ってきます。\n" +
+        "・「!ping」としゃべると「Pong!」と返ってきます。\n",
     );
   } else if (msg.content.match(/\/リマインダー追加/)) {
     // msg.channel.send("あいう")
@@ -259,9 +259,9 @@ client.on("message", async (msg) => {
 
     msg.channel.send(
       "このメッセージに❤️の絵文字で反応すると:" +
-      messeges[1] +
-      ":のロールが追加されます\n" +
-      role_description(messeges[2]), //ロールの説明文
+        messeges[1] +
+        ":のロールが追加されます\n" +
+        role_description(messeges[2]), //ロールの説明文
     );
   } else if (msg.content === "!react") {
     msg.react("😄");
@@ -308,9 +308,9 @@ client.on("messageReactionAdd", async (reaction, user) => {
   const channel = client.channels.cache.get("583955930161479682");
   channel.send(
     "ロール:" +
-    reaction.message.content.split(/:/)[1] +
-    " メンバー:" +
-    `<@${user.id}>`,
+      reaction.message.content.split(/:/)[1] +
+      " メンバー:" +
+      `<@${user.id}>`,
   );
 
   // let member = message.mentions.members.first();
@@ -334,7 +334,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
   // The reaction is now also fully available and the properties will be reflected accurately:
   console.log(
     `[${moment().format("YYYY/MM/DD HH:mm:ss:SSSS")}][${
-    reaction.count
+      reaction.count
     } ] ${user} have given the same reaction to this message!`,
   );
 });
@@ -343,11 +343,11 @@ var j = schedule.scheduleJob("* * * * * *", function () {
   // client.channels.get("583955930161479682").send('おはよう');
   // client.channels.get("583955930161479682").send("メッセージ");
   // client.channels.cache.get('583955930161479682').send('aaaaaaaaaaaaaaaaaaメッセージ')
-  client.channels.cache.get('583955930161479682')
+  client.channels.cache.get("583955930161479682");
 
-
-
-  console.log(moment().format("HH:mm:ss") + "きどうしたぞーーーーーーーーーーーーー");
+  console.log(
+    moment().format("HH:mm:ss") + "きどうしたぞーーーーーーーーーーーーー",
+  );
 });
 
 // console.log(process.env.TEES);
@@ -356,7 +356,7 @@ console.log("うごくぞー");
 console.log(process.env.MAIN_DISCORD_SWRVER_B);
 client.login(process.env.MAIN_DISCORD_SWRVER_B);
 
-function getdata(param) { }
+function getdata(param) {}
 getdata();
 // const express = require('express')
 // const app = express()

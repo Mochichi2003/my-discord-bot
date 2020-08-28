@@ -10,7 +10,6 @@ services:
     volumes:
       - ./opt:/root/
 
- 
   db:
     image: postgres:alpine
     # ports:
