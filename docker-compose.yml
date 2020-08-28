@@ -1,28 +1,16 @@
 version: "3"
 
 services:
-  bot:
-    # restart: always
-
+  python3:
+    restart: always
     build: .
-    env_file:
-      - ./.env
-    # ports:
-    # - "5500:5500"
-    # - "9005:9005"
-    volumes:
-      - ".:/app/"
-      - "node_modules_volume:/app/node_modules"
-      - "yarn-cache:/usr/local/share/.cache/yarn/v6"
+    container_name: "python3_bot"
+    working_dir: "/root/"
     tty: true
-    stdin_open: true
-    environment:
-      - "DATABASE_PASSWORD=postgres"
-    depends_on:
-      - db
-    links:
-      - db
-    # - "PS1='\u@\[\e[1;34m\] ${debian_chroot:+($debian_chroot)}\[\e[m\]\w$'"
+    volumes:
+      - ./opt:/root/
+
+ 
   db:
     image: postgres:alpine
     # ports:

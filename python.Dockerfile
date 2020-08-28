@@ -2,7 +2,7 @@ FROM python:3
 USER root
 
 
-WORKDIR /root/opt/
+WORKDIR /root/app/
 
 RUN apt-get update
 RUN apt-get -y install locales && \
@@ -13,15 +13,7 @@ ENV LC_ALL ja_JP.UTF-8
 ENV TZ JST-9
 ENV TERM xterm
 
-RUN apt-get install -y vim less \
-  nodejs \
-  npm  \
-  tmux
-RUN npm install -g nodemon
-
-
+RUN apt-get install -y vim less
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
-RUN pip install -U discord.py \
-  requests \
-  python-dotenv
+RUN pip install discord
