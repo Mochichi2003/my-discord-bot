@@ -16,12 +16,11 @@ ENV TERM xterm
 RUN apt-get install -y vim less \
   nodejs \
   npm  \
-  tmux
-RUN npm install -g nodemon
+  tmux && \
+  npm install -g nodemon
 
 
-RUN pip install --upgrade pip
-RUN pip install --upgrade setuptools
-RUN pip install -U discord.py \
+RUN pip install --upgrade pip && pip install --upgrade setuptools \
+  && pip install -U discord.py \
   requests \
   python-dotenv

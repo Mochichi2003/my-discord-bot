@@ -219,6 +219,9 @@ client.on("message", async (msg) => {
 
       // fs.writeFileSync('output.json', JSON.stringify({MyDog: response}, null, ' '));
     });
+
+
+    
   } else if (msg.content == "名言") {
     console.log(Quote.getQuote());
     msg.channel.send(

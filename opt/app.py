@@ -2,6 +2,7 @@ import discord
 import os
 from os.path import join, dirname
 from dotenv import load_dotenv
+import requests
 
 client = discord.Client()
 
@@ -31,10 +32,43 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.author == client.user:
+
         return
 
     if message.content.startswith('!ping'):
         await message.channel.send('pong!')
+    if ("わん" in message.content):
+        await message.channel.send('(Ｕ＾ω＾)わんわんお！')
+    if ("にゃー" in message.content or "みゃー" in message.content):
+        await message.channel.send('o(^･x･^)o ﾐｬｧ♪')
+    if ("もち" in message.content):
+        await message.channel.send('モチモチモチモチモﾁﾓﾁﾓﾁﾓ(ﾉ)`ω´(ヾ)')
+
+    if("/天気" in message.content):
+        WEATHER_BASE_URL_KEY = os.environ.get("WEATHER_API")
+        print(WEATHER_BASE_URL_KEY)
+        # 街の場所を指定するところ
+        if "東京" in message.content:
+            city = "Tokyo"
+        elif "新潟" in message.content:
+            city = "Niigata-shi"
+        elif "札幌" in message.content:
+            city = "Sapporo-shi"
+        elif "横浜" in message.content:
+            city = "Yokohama-shi"
+        elif "大宮" in message.content:
+            city = "Ōmiya"
+        else:
+            await message.channel.send('現在対応しているのは、東京、新潟、札幌、横浜、大宮です')
+
+        Request_url = "http://api.openweathermap.org/data/2.5/forecast?q=" + \
+            city + ",jp&units=metric&APPID=" + WEATHER_BASE_URL_KEY
+
+        response = requests.get(Request_url)
+        print(response.status_code)    # HTTPのステータスコード取得
+        print(response.text)    # レスポンスのHTMLを文字列で取得
+
+        await message.channel.send('天気')
 
     if ("/ぴえん" in message.content):
         # pien_Messege[1] ="🤬"
