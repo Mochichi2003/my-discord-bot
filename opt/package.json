@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec \"python app.py\" ./app.py  2>&1 | tee -a app.log",
+    "dev": "nodemon --exec \"python app.py\"   2>&1 | tee -a app.log",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

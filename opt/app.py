@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import requests
 import time
 import datetime
+import json
 
 
 client = discord.Client()
@@ -34,7 +35,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    print("[" + datetime.datetime.now() + "]" + message.content)
+    print("[" + str(datetime.datetime.now()) + "]" + message.content)
     if message.author == client.user:
 
         return
@@ -75,12 +76,28 @@ async def on_message(message):
         )
 
         response = requests.get(Request_url)
+        data = response.json()
+        jsonText = json.dumps(data, indent=4)
         print(response.status_code)  # HTTPのステータスコード取得
-        # print(response.text)    # レスポンスのHTMLを文字列で取得
-        value = response.text
+        # print(response.content)    # レスポンスのHTMLを文字列で取得
+        # print(jsonText)    # レスポンスのHTMLをJSON形式で取得
+        value = response.content
         Post_text = None
+        print(type(data))
+        # print(data["list"][1])
+        weather_date = None
+        for i in range(15):
+            # print("気温" + str(data["list"][i]["main"]["temp"]))
+            # print("天気" + data["list"][i]["weather"][0]["main"])
+            # print("風速" + str(data["list"][i]["wind"]["speed"]))
+            # print("日付" + str(data["list"][i]["dt_txt"]))
 
-        print("value = " + value["list"])
+
+            # print(type(data["list"][i]["main"]["temp"]))
+            # print(type(data["list"][i]["weather"][0]["main"]))
+            # print(type(data["list"][i]["wind"]["speed"]))
+            # print(type(data["list"][i]["dt_txt"]))
+            # print(str(i) + " " + str(data["list"][i]) + "\n")
 
         await message.channel.send("天気")
 
