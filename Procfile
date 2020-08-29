@@ -1,1 +1,1 @@
-web: yarn start
+web: python opt/app.py
