@@ -27,7 +27,8 @@ def weather_dttxt_to_data_and_time(value):
     times = value.split()
     date = times[0].split("-")
     Times_of_Day = times[1].split(":")
-    Result = date[0] + "月" + date[1] + "日 " + Times_of_Day[0] + ":" + Times_of_Day[1]
+    Result = date[1] + "月" + date[2] + "日 " + \
+        Times_of_Day[0] + ":" + Times_of_Day[1]
     return Result
     # print(tstr)
 
@@ -49,7 +50,7 @@ def weather_name_to_emoji(value):
 
 # print(weather_name_to_emoji("Rain"))
 print("あいうえお")
-print(str(weather_dttxt_to_data_and_time("2020-08-31 09:00:00")))
+# print(str(weather_dttxt_to_data_and_time("2020-08-31 09:00:00")))
 
 
 @client.event
@@ -115,12 +116,27 @@ async def on_message(message):
         Post_text = None
         print(type(data))
         # print(data["list"][1])
-        weather_date = None
+        weather_date = "てんきだよー\n"
         for i in range(15):
-            print("気温" + str(data["list"][i]["main"]["temp"]))
-            print("天気" + data["list"][i]["weather"][0]["main"])
-            print("風速" + str(data["list"][i]["wind"]["speed"]))
-            print("日付" + str(data["list"][i]["dt_txt"]))
+
+            weather_date = weather_date + (
+                weather_dttxt_to_data_and_time(str(data["list"][i]["dt_txt"]))
+                + " "
+                + weather_name_to_emoji(data["list"][i]["weather"][0]["main"])
+                + " "
+                + str(data["list"][i]["main"]["temp"])
+                + "℃ "
+                + "風速"
+                + str(data["list"][i]["wind"]["speed"])
+                + "m"
+                + "\n"
+            )
+            # print("気温" + str(data["list"][i]["main"]["temp"]))
+            # print(
+            #     "天気" + weather_name_to_emoji(data["list"][i]["weather"][0]["main"]))
+            # print("風速" + str(data["list"][i]["wind"]["speed"]))
+            # print(
+            #     "日付" + weather_dttxt_to_data_and_time(str(data["list"][i]["dt_txt"])))
 
             # print(type(data["list"][i]["main"]["temp"]))
             # print(type(data["list"][i]["weather"][0]["main"]))
@@ -128,7 +144,7 @@ async def on_message(message):
             # print(type(data["list"][i]["dt_txt"]))
             # print(str(i) + " " + str(data["list"][i]) + "\n")
 
-        await message.channel.send("天気")
+        await message.channel.send(weather_date )
 
     if "/ぴえん" in message.content:
         # pien_Messege[1] ="🤬"
