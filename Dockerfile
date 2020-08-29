@@ -24,3 +24,5 @@ RUN pip install --upgrade pip && pip install --upgrade setuptools \
   && pip install -U discord.py \
   requests \
   python-dotenv
+RUN pip install --upgrade datetime \
+  black
