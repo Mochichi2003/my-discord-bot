@@ -13,6 +13,8 @@ ENV LC_ALL ja_JP.UTF-8
 ENV TZ JST-9
 ENV TERM xterm
 
+COPY requirements.txt .
+
 RUN apt-get install -y vim less \
   nodejs \
   npm  \
@@ -20,10 +22,4 @@ RUN apt-get install -y vim less \
   npm install -g nodemon
 
 
-RUN pip install --upgrade pip && pip install --upgrade setuptools \
-  && pip install -U discord.py \
-  requests \
-  python-dotenv
-RUN pip install --upgrade datetime \
-  black \
-  flask
+RUN pip install -r requirements.txt
