@@ -6,7 +6,7 @@ import requests
 import time
 import datetime
 import json
-
+# from flask import *  # 必要なライブラリのインポート
 
 client = discord.Client()
 
@@ -27,8 +27,7 @@ def weather_dttxt_to_data_and_time(value):
     times = value.split()
     date = times[0].split("-")
     Times_of_Day = times[1].split(":")
-    Result = date[1] + "月" + date[2] + "日 " + \
-        Times_of_Day[0] + ":" + Times_of_Day[1]
+    Result = date[1] + "月" + date[2] + "日 " + Times_of_Day[0] + ":" + Times_of_Day[1]
     return Result
     # print(tstr)
 
@@ -144,7 +143,7 @@ async def on_message(message):
             # print(type(data["list"][i]["dt_txt"]))
             # print(str(i) + " " + str(data["list"][i]) + "\n")
 
-        await message.channel.send(weather_date )
+        await message.channel.send(weather_date)
 
     if "/ぴえん" in message.content:
         # pien_Messege[1] ="🤬"

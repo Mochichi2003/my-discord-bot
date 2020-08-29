@@ -25,4 +25,5 @@ RUN pip install --upgrade pip && pip install --upgrade setuptools \
   requests \
   python-dotenv
 RUN pip install --upgrade datetime \
-  black
+  black \
+  flask

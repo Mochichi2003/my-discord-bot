@@ -6,6 +6,8 @@ services:
     build: .
     container_name: "python3_bot"
     working_dir: "/root/"
+    ports:
+      - "230:230"
     tty: true
     volumes:
       - ./opt:/root/
