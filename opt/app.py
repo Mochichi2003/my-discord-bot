@@ -22,6 +22,36 @@ load_dotenv(dotenv_path)
 print(os.environ.get("MAIN_DISCORD_SWRVER_B"))
 
 
+def weather_dttxt_to_data_and_time(value):
+    # 2020-08-31 09:00:00
+    times = value.split()
+    date = times[0].split("-")
+    Times_of_Day = times[1].split(":")
+    Result = date[0] + "月" + date[1] + "日 " + Times_of_Day[0] + ":" + Times_of_Day[1]
+    return Result
+    # print(tstr)
+
+
+def weather_name_to_emoji(value):
+    retun_text = None
+    if value == "Clear":
+        retun_text = "☀️"
+    elif value == "Clouds":
+        retun_text = "☁️"
+    elif value == "Rain":
+        retun_text = "🌧"
+    elif value == "Snow":
+        retun_text = "⛄️"
+    else:
+        retun_text = value + "\n\n_*!!実装されてないものがありますこのBOTを作った製作者に伝えてください!!*_\n\n"
+    return retun_text
+
+
+# print(weather_name_to_emoji("Rain"))
+print("あいうえお")
+print(str(weather_dttxt_to_data_and_time("2020-08-31 09:00:00")))
+
+
 @client.event
 async def on_ready():
 
@@ -87,11 +117,10 @@ async def on_message(message):
         # print(data["list"][1])
         weather_date = None
         for i in range(15):
-            # print("気温" + str(data["list"][i]["main"]["temp"]))
-            # print("天気" + data["list"][i]["weather"][0]["main"])
-            # print("風速" + str(data["list"][i]["wind"]["speed"]))
-            # print("日付" + str(data["list"][i]["dt_txt"]))
-
+            print("気温" + str(data["list"][i]["main"]["temp"]))
+            print("天気" + data["list"][i]["weather"][0]["main"])
+            print("風速" + str(data["list"][i]["wind"]["speed"]))
+            print("日付" + str(data["list"][i]["dt_txt"]))
 
             # print(type(data["list"][i]["main"]["temp"]))
             # print(type(data["list"][i]["weather"][0]["main"]))
