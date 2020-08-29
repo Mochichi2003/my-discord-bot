@@ -10,7 +10,7 @@ services:
       - "230:230"
     tty: true
     volumes:
-      - ./opt:/root/
+      - ./:/root/
 
   db:
     image: postgres:alpine

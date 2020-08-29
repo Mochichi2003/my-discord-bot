@@ -1,1 +1,1 @@
-web: python opt/app.py
+web: python app.py
