@@ -183,7 +183,7 @@ async def の1行上が定期実行を示すもので、()内で間隔を指定�
 """
 @tasks.loop(seconds=1)
 async def send_message_every_10sec():
-    await channel_sent.send("10秒経ったよ")
+    await channel_sent.send("ぱぴぷ")
 
 """
 今回はbotの起動直後に定期実行を開始したいので、
@@ -194,7 +194,7 @@ botの準備ができた段階で定期実行をstart()します
 @client.event
 async def on_ready():
     global channel_sent
-    channel_sent = client.get_channel(741644959601393697)
+    channel_sent = client.get_channel(741655641961136238)
     send_message_every_10sec.start()
     # テストサーバーの方
 
