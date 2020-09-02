@@ -1,2 +1,2 @@
-web: python manage.py
+discordbot: python manage.py
 
