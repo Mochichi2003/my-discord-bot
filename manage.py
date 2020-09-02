@@ -6,6 +6,8 @@ import requests
 import time
 import datetime
 import json
+from discord.ext import tasks
+
 # from flask import *  # 必要なライブラリのインポート
 
 client = discord.Client()
@@ -27,7 +29,8 @@ def weather_dttxt_to_data_and_time(value):
     times = value.split()
     date = times[0].split("-")
     Times_of_Day = times[1].split(":")
-    Result = date[1] + "月" + date[2] + "日 " + Times_of_Day[0] + ":" + Times_of_Day[1]
+    Result = date[1] + "月" + date[2] + "日 " + \
+        Times_of_Day[0] + ":" + Times_of_Day[1]
     return Result
     # print(tstr)
 
@@ -170,6 +173,30 @@ async def on_message(message):
             await message.channel.send(target_list)
 
         # await message.channel.send('ピエン')
+
+
+channel_sent = None
+"""
+10秒ごとに発言するメソッドを定義している部分。
+async def の1行上が定期実行を示すもので、()内で間隔を指定します。
+例えば5分ごとなら(minutes=5)です。
+"""
+@tasks.loop(seconds=1)
+async def send_message_every_10sec():
+    await channel_sent.send("10秒経ったよ")
+
+"""
+今回はbotの起動直後に定期実行を開始したいので、
+botの準備ができた段階で定期実行をstart()します
+"""
+
+
+@client.event
+async def on_ready():
+    global channel_sent
+    channel_sent = client.get_channel(741644959601393697)
+    send_message_every_10sec.start()
+    # テストサーバーの方
 
 
 client.run(os.environ.get("MAIN_DISCORD_SWRVER_B"))
