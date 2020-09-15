@@ -98,16 +98,18 @@ async def on_message(message):
             city = "Yokohama-shi"
         elif "大宮" in message.content:
             city = "Ōmiya"
+        elif "シベリア"  in message.content:
+            city = "Yakutsk"
         else:
             await message.channel.send("現在対応しているのは、東京、新潟、札幌、横浜、大宮です")
 
         Request_url = (
             "http://api.openweathermap.org/data/2.5/forecast?q="
             + city
-            + ",jp&units=metric&APPID="
+            + ",&units=metric&APPID="
             + WEATHER_BASE_URL_KEY
         )
-
+        print("Request_url = " + Request_url)
         response = requests.get(Request_url)
         data = response.json()
         jsonText = json.dumps(data, indent=4)
