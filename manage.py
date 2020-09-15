@@ -156,6 +156,8 @@ async def on_message(message):
             # print(str(i) + " " + str(data["list"][i]) + "\n")
 
         await message.channel.send(weather_date)
+    if "/git remote -v" in message.content:
+        await message.channel.send("https://github.com/Mochichi2003/my-discord-bot")
 
     if "/ぴえん" in message.content:
         # pien_Messege[1] ="🤬"
