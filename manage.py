@@ -87,26 +87,33 @@ async def on_message(message):
         print(WEATHER_BASE_URL_KEY)
         # 街の場所を指定するところ
         city = None
+        country = None
         if "東京" in message.content:
             print("東京のを取得する")
             city = "Tokyo"
+            country = "jp"
         elif "新潟" in message.content:
             city = "Niigata-shi"
+            country = "jp"
         elif "札幌" in message.content:
             city = "Sapporo-shi"
+            country = "jp"
         elif "横浜" in message.content:
             city = "Yokohama-shi"
+            country = "jp"
         elif "大宮" in message.content:
             city = "Ōmiya"
-        elif "シベリア"  in message.content:
+            country = "jp"
+        elif "ヤクーツク"  in message.content:
             city = "Yakutsk"
+            country = "ru"
         else:
-            await message.channel.send("現在対応しているのは、東京、新潟、札幌、横浜、大宮です")
+            await message.channel.send("現在対応しているのは、東京、新潟、札幌、横浜、大宮、ロシアのヤクーツクです")
 
         Request_url = (
             "http://api.openweathermap.org/data/2.5/forecast?q="
             + city
-            + ",&units=metric&APPID="
+            + ","+country+"&units=metric&APPID="
             + WEATHER_BASE_URL_KEY
         )
         print("Request_url = " + Request_url)
